@@ -1,0 +1,23 @@
+﻿@model TargDeMuzica.Models.Review;
+
+<h2>@ViewBag.ReviewContent</h2>
+
+<br />
+
+<p>@Model.ReviewContent</p>
+
+
+<form method="post" asp-action="Delete" asp-controller="Reviews" asp-route-id="@Model.ReviewID ">
+    <button class="btn btn-danger" type="submit">Sterge comentariul</button>
+</form>
+
+
+<br />
+
+<a class="btn alert-success" asp-action="Index" asp-controller="Reviews">Afisare comentarii</a>
+
+
+<br />
+<hr />
+<br />
+

@@ -1,0 +1,25 @@
+﻿@model TargDeMuzica.Models.Artist;
+
+<h2>@ViewBag.ArtistName</h2>
+
+<br />
+
+<p>@Model.ArtistName</p>
+
+
+<form method="post" asp-action="Delete" asp-controller="Artists" asp-route-id="@Model.ArtistID ">
+
+    <button class="btn btn-danger" type="submit">Sterge artistul</button>
+
+</form>
+
+
+<br />
+
+<a class="btn alert-success" asp-action="Index" asp-controller="Artists">Afisare lista artisti</a>
+
+
+<br />
+<hr />
+<br />
+

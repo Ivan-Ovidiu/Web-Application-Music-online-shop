@@ -1,0 +1,25 @@
+﻿@model TargDeMuzica.Models.Review;
+
+
+<h2>@ViewBag.ReviewContent</h2>
+
+<form method="post" asp-action="Edit" asp-controller="Reviews" asp-route-id="@Model.ReviewID">
+
+    <div class="form-group">
+        <label asp-for="ReviewContent" class="control-label">Comentariu:</label>
+        <input asp-for="ReviewContent" class="form-control" />
+        <span asp-validation-for="ReviewContent" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ReviewDate" class="control-label">Data:</label>
+        <input asp-for="ReviewDate" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="StarRating" class="control-label">Rating:</label>
+        <input asp-for="StarRating" class="form-control" />
+        <span asp-validation-for="StarRating" class="text-danger"></span>
+    </div>
+
+    <button class="btn btn-success" type="submit">Modifica comenatriul</button>
+
+</form>

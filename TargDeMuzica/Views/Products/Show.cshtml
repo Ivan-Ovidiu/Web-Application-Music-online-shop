@@ -1,0 +1,286 @@
+﻿@model TargDeMuzica.Models.Product
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<TargDeMuzica.Models.ApplicationUser> UserManager
+<style>
+
+    .fixed-bottom-right {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    .btn-float {
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        padding: 12px 24px;
+    }
+
+    :root {
+    }
+
+    body {
+        color: var(--text-color);
+        background-color: #f8f8be;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .product-title {
+        color: var(--accent-color);
+        font-size: 2.5rem;
+        margin: 2rem 0;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .product-container {
+        background-color: var(--secondary-color);
+        border-radius: 15px;
+        padding: 2rem;
+        margin: 2rem 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-image {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-details dt {
+        color: var(--accent-color);
+        font-weight: 600;
+        padding: 0.5rem 0;
+    }
+
+    .product-details dd {
+        margin-bottom: 1rem;
+    }
+
+    .btn-custom {
+        background-color: var(--primary-color);
+        color: black;
+        padding: 0.75rem 1.5rem;
+        border-radius: 25px;
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+        .btn-custom:hover {
+            background-color: #f9fae0;
+            transform: translateY(-2px);
+            color: black;
+        }
+
+    .btn-secondary {
+        background-color: var(--accent-color);
+    }
+
+    .review-section {
+        background-color: var(--light-gray);
+        padding: 2rem;
+        border-radius: 15px;
+        margin-top: 3rem;
+    }
+
+    .review-form {
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .review-card {
+        border-radius: 10px;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s ease;
+    }
+
+        .review-card:hover {
+            transform: translateY(-3px);
+        }
+
+    .star-rating {
+        color: #ffd700;
+    }
+
+    .empty-star {
+        color: #d1d1d1;
+    }
+</style>
+
+<h1 class="product-title">@Model.ProductName</h1>
+
+
+
+<div class="product-container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="product-image">
+                @if (Model.ProductImageLocation.Contains(".mp4") || Model.ProductImageLocation.Contains(".mov"))
+                {
+                    <video width="100%" height="450" controls class="rounded">
+                        <source src="@Model.ProductImageLocation" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                }
+                else
+                {
+                    <img src="@Model.ProductImageLocation" alt="Product image" class="img-fluid rounded" style="width:100%; height: 450px; object-fit: cover" />
+                }
+            </div>
+        </div>
+        <div class="col-md-6">
+            <dl class="row product-details">
+                <dt class="col-sm-4">Description:</dt>
+                <dd class="col-sm-8">@Model.ProductDescription</dd>
+
+                <dt class="col-sm-4">Price:</dt>
+                <dd class="col-sm-8 h4 text-primary">@Model.ProductPrice.ToString("C")</dd>
+
+                <dt class="col-sm-4">Stock:</dt>
+                <dd class="col-sm-8">@Model.ProductStock</dd>
+
+                <dt class="col-sm-4">Score:</dt>
+                <dd class="col-sm-8">@(Model.ProductScore.HasValue ? Model.ProductScore.Value.ToString("F1") : "Not Rated")</dd>
+
+                <dt class="col-sm-4">Genres:</dt>
+                <dd class="col-sm-8">@(Model.ProductGenres != null ? string.Join(", ", Model.ProductGenres) : "None")</dd>
+
+                <dt class="col-sm-4">Music Support:</dt>
+                <dd class="col-sm-8">
+                    @(Model.MusicSuport?.MusicSuportName ?? "Unknown")
+                </dd>
+
+                <dt class="col-sm-4">Artist:</dt>
+                <dd class="col-sm-8">@(Model.Artist != null ? Model.Artist.ArtistName : "Unknown")</dd>
+            </dl>
+
+            <div class="mt-4">
+                <a asp-controller="Carts" asp-action="Index" class="btn btn-custom" style="background-color: #28a745; color: white;">Add to Cart</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="review-section">
+    <h2 class="mb-4">Add a Review</h2>
+    <div class="review-form">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <form asp-controller="Reviews" asp-action="New" method="post">
+                <input type="hidden" name="ProductId" value="@Model.ProductID" />
+                <input type="hidden" name="ReturnUrl" value="@Context.Request.Path" />
+
+
+                <div class="form-group mb-3">
+                    @{
+                        var user = await UserManager.GetUserAsync(User);
+                        var userName = user?.UserName ?? "Anonymous";
+                    }
+                    <input type="hidden" id="ReviewerName" name="ReviewerName" value="@userName" />
+                    <div class="text-muted">Posting review as: @userName</div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="ReviewContent" class="form-label">Review Content</label>
+                    <textarea class="form-control" id="ReviewContent" name="ReviewContent" rows="4"
+                              placeholder="Share your thoughts about this product..."></textarea>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="StarRating" class="form-label">Rating</label>
+                    <select class="form-control" id="StarRating" name="StarRating" required>
+                        <option value="" disabled selected>Select a rating</option>
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <option value="@i">@i Star@(i > 1 ? "s" : "")</option>
+                        }
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-custom">Submit Review</button>
+            </form>
+        }
+        else
+        {
+            <div class="alert alert-warning">
+                You must be signed in to leave a review.
+            </div>
+        }
+    </div>
+
+    <div class="mt-5">
+        <h2 class="mb-4">Product Reviews</h2>
+        @if (Model != null)
+        {
+            @if (Model.Reviews != null && Model.Reviews.Any())
+            {
+                foreach (var review in Model.Reviews.OrderByDescending(r => r.ReviewDate))
+                {
+                    <div class="review-card p-4">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-1">@review.ReviewerName</h5>
+                                    <div class="star-rating">
+                                        @for (int i = 0; i < review.StarRating; i++)
+                                        {
+                                            <span>★</span>
+                                        }
+                                        @for (int i = review.StarRating; i < 5; i++)
+                                        {
+                                            <span class="empty-star">☆</span>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="text-muted small mb-3">
+                                    @review.ReviewDate.ToString("MMMM dd, yyyy")
+                                </div>
+                                <p class="mb-0">@review.ReviewContent</p>
+                            </div>
+
+                            @if (User.IsInRole("Administrator"))
+                            {
+                                <div class="ms-3">
+                                    <div class="d-flex gap-2">
+                                        <a class="btn btn-custom btn-sm"
+                                           asp-controller="Reviews"
+                                           asp-action="Edit"
+                                           asp-route-id="@review.ReviewID">
+                                            Edit
+                                        </a>
+                                        <a class="btn btn-custom btn-secondary btn-sm"
+                                           asp-controller="Reviews"
+                                           asp-action="Delete"
+                                           asp-route-id="@review.ReviewID"
+                                           onclick="return confirm('Are you sure you want to delete this review?');">
+                                            Delete
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="review-card p-4 text-center">
+                    <p class="text-muted mb-0">No reviews yet. Be the first to review this product!</p>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+<div class="fixed-bottom-right">
+    <a asp-action="Index" class="btn btn-custom btn-secondary btn-float">Back to List</a>
+</div>

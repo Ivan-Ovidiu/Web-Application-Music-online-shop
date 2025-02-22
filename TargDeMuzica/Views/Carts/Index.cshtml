@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .wip-container {
+            border-radius: 15px;
+            position: center;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .wip-text {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            background: linear-gradient(45deg, #007bff, #6610f2, #6f42c1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .tool-icon {
+            font-size: 2rem;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .bounce {
+            animation: bounce 1s infinite;
+        }
+
+        .rotate {
+            animation: rotate 2s linear infinite;
+        }
+
+        .slide {
+            animation: slide 2s ease-in-out infinite;
+        }
+
+   
+        .progress-bar-animated {
+            height: 4px;
+            background: linear-gradient(90deg, #007bff, #6610f2, #6f42c1);
+            background-size: 200% 100%;
+            animation: gradient 2s linear infinite;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="wip-container">
+   <div class="row align-items-center justify-content-center">
+        <div class="col-12 text-center">
+            <div class="d-flex justify-content-center mb-4">
+                <span class="tool-icon rotate me-3">🔧</span>
+                <span class="tool-icon bounce mx-3">⚙️</span>
+                <span class="tool-icon rotate ms-3">🛠️</span>
+            </div>
+            <h1 class="wip-text bounce">WORK IN PROGRESS</h1>
+            <p class="text-muted mt-3 slide">This page is currently under construction. Please check back later!</p>
+            <div class="progress mt-4" style="height: 4px;">
+                <div class="progress-bar progress-bar-animated w-100"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Add dynamic effects
+    document.addEventListener('DOMContentLoaded', function() {
+        const wipText = document.querySelector('.wip-text');
+        const toolIcons = document.querySelectorAll('.tool-icon');
+        
+        // Random bounce effect for tools
+        setInterval(() => {
+            toolIcons.forEach(icon => {
+                if (Math.random() > 0.7) {
+                    icon.style.transform = 'translateY(-10px)';
+                    setTimeout(() => {
+                        icon.style.transform = 'translateY(0)';
+                    }, 200);
+                }
+            });
+        }, 1000);
+
+        // Hover effect for the main text
+        wipText.addEventListener('mouseover', function() {
+            this.style.transform = 'scale(1.1)';
+        });
+
+        wipText.addEventListener('mouseout', function() {
+            this.style.transform = 'scale(1)';
+        });
+    });
+</script>
+
+</body>
+</html>

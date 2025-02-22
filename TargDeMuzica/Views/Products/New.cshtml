@@ -1,0 +1,72 @@
+﻿@model TargDeMuzica.Models.Product;
+
+<h2> Adaugare Produs</h2>
+
+
+<form method="post" asp-action="New" asp-controller="Products">
+
+    <div class="form-group">
+        <label asp-for="ProductName" class="control-label">Nume Produs:</label>
+        <input asp-for="ProductName" class="form-control" />
+        <span asp-validation-for="ProductName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ProductDescription" class="control-label">Descriere:</label>
+        <input asp-for="ProductDescription" class="form-control" />
+        <span asp-validation-for="ProductDescription" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ProductPrice" class="control-label">Pret:</label>
+        <input asp-for="ProductPrice" class="form-control" />
+        <span asp-validation-for="ProductPrice" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ProductStock" class="control-label">Stoc:</label>
+        <input asp-for="ProductStock" class="form-control" />
+        <span asp-validation-for="ProductStock" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Incarca Imaginea</label>
+        <input name="Image" type="file" class="form-control" />
+        <span class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ProductGenresTemp" class="control-label">Lista de genuri muzicale (delimitate printr-un spatiu):</label>
+        <input asp-for="ProductGenresTemp" class="form-control" />
+        <span asp-validation-for="ProductGenresTemp" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="ArtistID">Selectati Artistul</label>
+        <br />
+        <select asp-for="ArtistID" asp-items="Model.ArtistList" class="form-control">
+            <option value="">Selectati suportul de muzica</option>
+        </select>
+
+       
+        <span asp-validation-for="ArtistID" class="text-danger"></span>
+
+        <br />
+    </div>
+    <div class="form-group">
+        <label for="MusicSuportID">Selectati Suportul de Muzica</label>
+        <br />
+        <select asp-for="MusicSuportID" asp-items="Model.MusicSup" class="form-control">
+            <option value="">Selectati suportul de muzica</option>
+        </select>
+
+        <span asp-validation-for="MusicSuportID" class="text-danger"></span>
+
+        <br />
+    </div>
+
+    
+    <button class="btn btn-success" type="submit">Adauga produs</button>
+
+</form>
+

@@ -1,0 +1,301 @@
+﻿@model IEnumerable<TargDeMuzica.Models.IncomingRequest>
+@{
+    ViewData["Title"] = "Cereri de Produse în Așteptare";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Cereri de Produse în Așteptare</h2>
+
+    @if (TempData["message"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["message"]
+        </div>
+    }
+
+    <div class="table-responsive">
+        <table class="table table-hover custom-table">
+            <thead>
+                <tr>
+                    <th>Utilizator</th>
+                    <th>Produs</th>
+                    <th>Data Cererii</th>
+                    <th class="text-center">Acțiuni</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var request in Model)
+                {
+                    <tr>
+                        <td>@request.User.UserName</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                @request.ProposedProduct.ProductName
+                                <div class="info-tooltip-container ms-2">
+                                    <div class="arrow-button"
+                                         data-bs-toggle="tooltip"
+                                         data-bs-html="true"
+                                         title="<div class='tooltip-content'>
+                                                 @if (!string.IsNullOrEmpty(request.ProposedProduct.ProductImageLocation))
+                                                 {
+                                                     <div class='product-image-container mb-2'>
+                                                         <img src='@request.ProposedProduct.ProductImageLocation' class='product-image' alt='Product Image'>
+                                                     </div>
+                                                 }
+                                                 <p><strong>Descriere:</strong> @request.ProposedProduct.ProductDescription</p>
+                                                 <p><strong>Preț:</strong> @request.ProposedProduct.ProductPrice.ToString("C")</p>
+                                                 <p><strong>Stoc:</strong> @request.ProposedProduct.ProductStock</p>
+                                                 @if (request.ProposedProduct.ProductGenres != null)
+                                                 {
+                                                     <p><strong>Genuri:</strong> @string.Join(", ", request.ProposedProduct.ProductGenres)</p>
+                                                 }
+                                                 </div>">
+                                        </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>@request.RequestDate.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>
+                            <form asp-action="Review" method="post" class="update-role-form d-flex justify-content-center align-items-center gap-2">
+                                <input type="hidden" name="requestId" value="@request.RequestID" />
+                                <input type="hidden" name="approved" id="approved-@request.RequestID" value="false" />
+                                <div class="d-flex align-items-center">
+                                    <div class="action-button-container">
+                                        <button type="submit" onclick="document.getElementById('approved-@request.RequestID').value = 'true';" class="action-btn approve-btn">
+                                        </button>
+                                    </div>
+                                    <div class="action-button-container">
+                                        <button type="submit" onclick="document.getElementById('approved-@request.RequestID').value = 'false';" class="action-btn reject-btn">
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .custom-table {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+        .custom-table thead th {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            color: #495057;
+        }
+
+    .update-role-form {
+        margin: 0;
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    .arrow-button {
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 8px solid #6c757d;
+        cursor: pointer;
+        display: inline-block;
+        transition: transform 0.2s ease;
+    }
+
+        .arrow-button:hover {
+            border-top-color: #495057;
+            transform: scale(1.2);
+        }
+
+  
+    .tooltip-content {
+        text-align: left;
+        font-size: 0.875rem;
+        padding: 8px;
+        max-width: 300px;
+    }
+
+    .product-image-container {
+        max-width: 150px;
+        max-height: 150px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+
+    .product-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+        .tooltip-content p {
+            margin-bottom: 0.5rem;
+        }
+
+            .tooltip-content p:last-child {
+                margin-bottom: 0;
+            }
+
+    .action-button-container {
+        position: relative;
+        width: 100px;
+        height: 40px;
+        display: inline-block;
+        margin-left: 10px;
+    }
+
+    .action-btn {
+        outline: none;
+        height: 40px;
+        width: 100px;
+        border-radius: 6px;
+        background: white;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        padding: 0;
+        position: relative;
+        font-size: 14px;
+    }
+
+    .approve-btn {
+        border: 2px solid #1ECD97;
+        color: #1ECD97;
+    }
+
+        .approve-btn:hover {
+            color: white;
+            background: #1ECD97;
+        }
+
+        .approve-btn:after {
+            content: "Aprobă";
+            font-size: 14px;
+            line-height: 36px;
+        }
+
+    .reject-btn {
+        border: 2px solid #dc3545;
+        color: #dc3545;
+    }
+
+        .reject-btn:hover {
+            color: white;
+            background: #dc3545;
+        }
+
+        .reject-btn:after {
+            content: "Respinge";
+            font-size: 14px;
+            line-height: 36px;
+        }
+
+    .action-btn.onclic {
+        width: 40px;
+        border-radius: 50%;
+        border-width: 3px;
+        font-size: 0;
+        margin-left: 30px;
+    }
+
+    .approve-btn.onclic {
+        border-color: #bbbbbb;
+        border-left-color: #1ECD97;
+        animation: spin 2s linear infinite;
+    }
+
+    .reject-btn.onclic {
+        border-color: #bbbbbb;
+        border-left-color: #dc3545;
+        animation: spin 2s linear infinite;
+    }
+
+    .action-btn.onclic:after {
+        content: "";
+    }
+
+    .action-btn.validate {
+        font-size: 13px;
+        color: white;
+        width: 40px;
+        border-radius: 50%;
+        margin-left: 30px;
+    }
+
+    .approve-btn.validate {
+        background: #1ECD97;
+    }
+
+    .reject-btn.validate {
+        background: #dc3545;
+    }
+
+    .action-btn.validate:after {
+        content: "✓";
+        font-family: Arial, sans-serif;
+    }
+
+    @@keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    .tooltip-inner {
+        max-width: 300px;
+        text-align: left;
+        background-color: #fff;
+        color: #333;
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+</style>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl, {
+                    html: true,
+                    placement: 'right',
+                    customClass: 'custom-tooltip'
+                });
+            });
+
+            const forms = document.querySelectorAll('.update-role-form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    const button = e.submitter;
+
+                    if (button) {
+                        button.classList.add('onclic');
+
+                        setTimeout(function () {
+                            button.classList.remove('onclic');
+                            button.classList.add('validate');
+
+                            setTimeout(function () {
+                                button.classList.remove('validate');
+                                form.submit();
+                            }, 1250);
+                        }, 2250);
+                    }
+                });
+            });
+        });
+    </script>
+}

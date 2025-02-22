@@ -1,0 +1,71 @@
+﻿@model TargDeMuzica.Models.Product
+
+@{
+    ViewData["Title"] = Model.ProductID == 0 ? "Create Product" : "Edit Product";
+}
+
+<h1>@ViewData["Title"]</h1>
+<a class="btn alert-success" asp-action="Delete" asp-controller="Products" asp-route-id="@Model.ProductID">Stergere produs</a>
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="@(Model.ProductID == 0 ? "Create" : "Edit")">
+            <div class="form-group">
+                <label asp-for="ProductName" class="control-label"></label>
+                <input asp-for="ProductName" class="form-control" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProductDescription" class="control-label"></label>
+                <textarea asp-for="ProductDescription" class="form-control"></textarea>
+                <span asp-validation-for="ProductDescription" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProductPrice" class="control-label"></label>
+                <input asp-for="ProductPrice" class="form-control" type="number" step="0.01" />
+                <span asp-validation-for="ProductPrice" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProductStock" class="control-label"></label>
+                <input asp-for="ProductStock" class="form-control" type="number" />
+                <span asp-validation-for="ProductStock" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProductImageLocation" class="control-label"></label>
+                <input asp-for="ProductImageLocation" class="form-control" />
+                <span asp-validation-for="ProductImageLocation" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="ProductGenresTemp" class="control-label">Genres</label>
+                <input asp-for="ProductGenresTemp" class="form-control" placeholder="Enter genres separated by commas" />
+                <span asp-validation-for="ProductGenresTemp" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MusicSuportID" class="control-label">Music Support</label>
+                <select asp-for="MusicSuportID" asp-items="Model.MusicSup" class="form-control"></select>
+                <span asp-validation-for="MusicSuportID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ArtistID" class="control-label">Artist</label>
+                <select asp-for="ArtistID" asp-items="Model.ArtistList" class="form-control"></select>
+                <span asp-validation-for="ArtistID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

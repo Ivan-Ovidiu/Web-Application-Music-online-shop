@@ -1,0 +1,32 @@
+﻿
+
+<h2>@ViewBag.ReviewContent</h2>
+<br />
+
+@if (TempData.ContainsKey("message"))
+{
+    <h1>@ViewBag.message</h1>
+}
+
+<br />
+<br />
+
+@foreach (var review in ViewBag.Reviews)
+{
+    @Html.Label("ReviewContent", "Comentariu")
+    <p>@review.ReviewContent</p>
+    @Html.Label("ReviewDate", "Data")
+    <p>@review.ReviewDate</p>
+    @Html.Label("StarRating", "Rating")
+    <p>@review.StarRating</p>
+    <a class="btn alert-success" asp-action="Show" asp-controller="Reviews" asp-route-id="@review.ReviewID">Afisare comantariu</a>
+    <a class="btn alert-success" asp-action="Edit" asp-controller="Reviews" asp-route-id="@review.ReviewID">Editare comentariu</a>
+
+    <br />
+    <hr />
+    <br />
+}
+<br />
+<a class="btn btn-success" asp-action="New" asp-controller="Reviews">Adauga comentariu</a>
+
+<br />

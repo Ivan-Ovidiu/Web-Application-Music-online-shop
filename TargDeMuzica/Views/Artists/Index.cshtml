@@ -1,0 +1,28 @@
+﻿
+
+<h2>@ViewBag.ArtistName</h2>
+<br />
+
+@if (TempData.ContainsKey("message"))
+{
+    <h1>@ViewBag.message</h1>
+}
+
+<br />
+<br />
+
+@foreach (var artist in ViewBag.Artists)
+{
+    @Html.Label("ArtistName", "Nume artist")
+    <p>@artist.ArtistName</p>
+    <a class="btn alert-success" asp-action="Show" asp-controller="Artists" asp-route-id="@artist.ArtistID">Afisare artist</a>
+    <a class="btn alert-success" asp-action="Edit" asp-controller="Artists" asp-route-id="@artist.ArtistID">Editare artist</a>
+
+    <br />
+    <hr />
+    <br />
+}
+<br />
+<a class="btn btn-success" asp-action="New" asp-controller="Artists">Adauga un nou artist</a>
+
+<br />

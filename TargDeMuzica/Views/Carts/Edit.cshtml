@@ -1,0 +1,15 @@
+﻿@model TargDeMuzica.Models.Cart;
+
+
+<h2>@ViewBag.TotalPrice</h2>
+
+<form method="post" asp-action="Edit" asp-controller="Artists" asp-route-id="@Model.CartID">
+
+    <div class="form-group">
+        <label asp-for="TotalPrice" class="form-label">Pret total</label>
+        <input asp-for="TotalPrice" class="form-control" />
+    </div>
+
+    <button class="btn btn-success" type="submit">Modifica pretul</button>
+
+</form>

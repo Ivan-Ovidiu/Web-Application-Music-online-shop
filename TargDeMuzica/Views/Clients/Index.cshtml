@@ -1,0 +1,194 @@
+﻿
+@model IEnumerable<TargDeMuzica.Models.Clients>
+
+
+
+<div class="container mt-4">
+    <h2 class="mb-4">Utilizatori Înregistrați</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Message"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    <div class="table-responsive">
+        <table class="table table-hover custom-table">
+            <thead>
+                <tr>
+                    <th>Nume Utilizator</th>
+                    <th>Email</th>
+                    <th>Rol Curent</th>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <th class="text-center">Acțiuni</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var client in Model)
+                {
+                    <tr>
+                        <td>@client.UserName</td>
+                        <td>@client.Email</td>
+                        <td>@client.CurrentRole</td>
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <td>
+                                <form asp-action="UpdateRole" method="post" class="update-role-form d-flex justify-content-center align-items-center gap-2">
+                                    <input type="hidden" name="userId" value="@client.ClientId" />
+                                    <select name="newRole" class="form-select form-select-sm role-select">
+                                        @foreach (var role in client.AllAvailableRoles)
+                                        {
+                                            if (role == client.CurrentRole)
+                                            {
+                                                <option value="@role" selected>@role</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@role">@role</option>
+                                            }
+                                        }
+                                    </select>
+                                    <div class="role-button-container">
+                                        <button type="submit" class="role-update-btn"></button>
+                                    </div>
+                                </form>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<style>
+    .role-button-container {
+        position: relative;
+        width: 100px;
+        height: 40px;
+        display: inline-block;
+        margin-left: 10px;
+    }
+
+    .update-role-form {
+        display: flex;
+        align-items: center;
+    }
+
+    .role-update-btn {
+        outline: none;
+        height: 40px;
+        width: 100px;
+        border-radius: 6px;
+        background: white;
+        border: 2px solid #1ECD97;
+        color: #1ECD97;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        padding: 0;
+        position: relative;
+    }
+
+        .role-update-btn:hover {
+            color: white;
+            background: #1ECD97;
+        }
+
+        .role-update-btn:after {
+            content: "Actualizati";
+            font-size: 14px;
+            line-height: 36px;
+        }
+
+        .role-update-btn.onclic {
+            width: 40px;
+            border-radius: 50%;
+            border-color: #bbbbbb;
+            border-width: 3px;
+            font-size: 0;
+            border-left-color: #1ECD97;
+            -webkit-animation: spin 2s linear infinite;
+            -moz-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+            margin-left: 30px; 
+        }
+
+            .role-update-btn.onclic:after {
+                content: "";
+            }
+
+        .role-update-btn.validate {
+            font-size: 13px;
+            color: white;
+            background: #1ECD97;
+            width: 40px;
+            border-radius: 50%;
+            margin-left: 30px; 
+        }
+
+            .role-update-btn.validate:after {
+                content: "✓";
+                font-family: Arial, sans-serif;
+            }
+
+    @@-moz-keyframes spin {
+        100% {
+            -moz-transform: rotate(360deg);
+        }
+    }
+
+    @@-webkit-keyframes spin {
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @@keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const forms = document.querySelectorAll('.update-role-form');
+
+            forms.forEach(form => {
+                const button = form.querySelector('.role-update-btn');
+
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    button.classList.add('onclic');
+
+                    setTimeout(function () {
+                        button.classList.remove('onclic');
+                        button.classList.add('validate');
+
+                        setTimeout(function () {
+                            button.classList.remove('validate');
+                            form.submit();
+                        }, 1250);
+                    }, 2250);
+                });
+            });
+        });
+    </script>
+}
