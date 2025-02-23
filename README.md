@@ -5,8 +5,8 @@
 # Roluri utilizatori
 
 1.Administrator:
-*Controleaza toate produsele si categoriile
-*Aproba sau respinge produse noi
+* Controleaza toate produsele si categoriile
+* Aproba sau respinge produse noi
 *Administreaza categoriile si poate crea unele noi
 *Poate sterge sau modifica produse si comentarii
 *Gestioneaza rolurile utilizatorilor
