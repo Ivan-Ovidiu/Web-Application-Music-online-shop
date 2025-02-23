@@ -1,4 +1,4 @@
-# Music online shop Web application
+# Music-online-shop Web application
 
 ![image](https://github.com/user-attachments/assets/403344d6-48d3-4f11-a455-cff606e71e6b)
 
