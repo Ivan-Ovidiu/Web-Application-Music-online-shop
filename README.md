@@ -28,9 +28,9 @@
 
 # Functionalitati Principale:
 
-* Adaugarea Produselor:
+* Adaugarea Produselor:<br />
 Utilizatorii colaborator si admin pot adauga produse in magazin. Aceste produse trebuie aprobate de administrator inainte de a fi vizibile. Administratorul are optiunea de a respinge sau aproba aceste cereri.
-* Managementul Categoriilor:
+* Managementul Categoriilor:<br />
 Produsele sunt organizate in categorii create dinamic de catre administrator. Acesta poate adauga noi categorii direct din interfata aplicatiei, precum si sa vizualizeze, editeze sau stearga categoriile existente.
 * Detalii Produse:
 Fiecare produs contine urmatoarele informatii obligatorii: titlu, descriere, poza, pret, stoc si rating. Sistemul include un mecanism de rating de la 1 la 5 stele. Fiecare utilizator poate acorda un singur rating per produs, iar scorul final este calculat pe baza tuturor rating-urilor existente.
