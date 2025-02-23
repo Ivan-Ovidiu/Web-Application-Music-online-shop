@@ -1,7 +1,7 @@
 # Music-online-shop Web application
 Dezvoltata in C# .NET Core si stilizata cu Bootstrap, 
 aceasta aplicatie web a fost realizata cu scopul de a vinde produse muzicale(CD,vinil,casete, etc.) si
-de a crea o interfata user-friendly prin intermediul careia clientii pot achizitiona cu usurinta ceea ce isi doresc.
+de a creea o interfata user-friendly prin intermediul careia clientii pot achizitiona cu usurinta ceea ce isi doresc.
 
 ![image](https://github.com/user-attachments/assets/403344d6-48d3-4f11-a455-cff606e71e6b)
 
