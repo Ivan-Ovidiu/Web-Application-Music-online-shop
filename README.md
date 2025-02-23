@@ -1,2 +1,2 @@
-# Web Application Music online shop
+# Music online shop WEB APPLICATION
  
