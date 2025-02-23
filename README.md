@@ -45,6 +45,7 @@ Rezultatele motorului de cautare pot fi sortate crescator sau descrescator in fu
 * Administrare:<br />
 Administratorul poate sterge si edita atat produse cat si comentarii. Acesta poate, de asemenea, sa activeze sau sa revoce drepturile utilizatorilor.
 
+# Exemple (screenshots)
 Adminul poate modifica rolurile utilizatorilor:
 ![image](https://github.com/user-attachments/assets/de318914-90b0-46f9-a4ee-5fb123ce9f25)
 
