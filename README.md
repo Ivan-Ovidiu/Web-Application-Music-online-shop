@@ -32,17 +32,17 @@
 Utilizatorii colaborator si admin pot adauga produse in magazin. Aceste produse trebuie aprobate de administrator inainte de a fi vizibile. Administratorul are optiunea de a respinge sau aproba aceste cereri.
 * Managementul Categoriilor:<br />
 Produsele sunt organizate in categorii create dinamic de catre administrator. Acesta poate adauga noi categorii direct din interfata aplicatiei, precum si sa vizualizeze, editeze sau stearga categoriile existente.
-* Detalii Produse:
+* Detalii Produse:<br />
 Fiecare produs contine urmatoarele informatii obligatorii: titlu, descriere, poza, pret, stoc si rating. Sistemul include un mecanism de rating de la 1 la 5 stele. Fiecare utilizator poate acorda un singur rating per produs, iar scorul final este calculat pe baza tuturor rating-urilor existente.
-* Review-uri:
+* Review-uri:<br />
 Produsele pot primi review-uri de tip text de la utilizatori. Review-ul include un comentariu text last de utilizator. Acest camp este optional, dar restul campurilor sunt obligatorii. Stocul reprezinta numarul de produse disponibile.
-* Editare Produse:
+* Editare Produse:<br />
 Utilizatorul colaborator poate sa editeze si sa stearga produsele adaugate de el. Dupa editare, produsul necesita din nou aprobare din partea administratorului.
-* Cautare Produse:
+* Cautare Produse:<br />
 Produsele pot fi cautate dupa denumire prin intermediul unui motor de cautare. De asemenea, produsele pot fi cautate dupa nume si trebuie sa fie gasite si in cazul in care utilizatorul cauta doar anumite parti care compun denumirea.
-* Sortare si Filtrare:
+* Sortare si Filtrare:<br />
 Rezultatele motorului de cautare pot fi sortate crescator sau descrescator in functie de pret si numarul de stele. Sistemul implementeaza filtre din care utilizatorul poate alege optiunile dorite.
-* Administrare:
+* Administrare:<br />
 Administratorul poate sterge si edita atat produse cat si comentarii. Acesta poate, de asemenea, sa activeze sau sa revoce drepturile utilizatorilor.
 
 Adminul poate modifica rolurile utilizatorilor:
