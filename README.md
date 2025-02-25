@@ -55,7 +55,7 @@ Administratorul poate sterge si edita atat produse cat si comentarii. Acesta poa
 * SQL Server (Local or Express)<br>
 ## Database Setup:
 > [!NOTE]
-> Foloseste aceste comenzi in terminal
+> Foloseste aceste comenzi in terminal<br>
 > Add-migration [nume_migratie]<br>
 > Update-Database<br>
 ## Configuratia rolurilor:
