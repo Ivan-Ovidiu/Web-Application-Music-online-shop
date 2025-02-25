@@ -59,19 +59,19 @@ Administratorul poate sterge si edita atat produse cat si comentarii. Acesta poa
 > Add-migration [nume_migratie]<br>
 > Update-Database<br>
 ## Configuratia rolurilor:
-Aplicatia vine cu urmatoarele roluri predefinite:<br>
-Administrator<br>
-Collaborator<br>
-UserN (Normal User)<br>
-UserI (Identified User)<br>
-Default admin credentials:<br>
-Email: admin@test.com<br>
-Parola: Admin1!<br>
+### Aplicatia vine cu urmatoarele roluri predefinite:<br>
+* Administrator<br>
+* Collaborator<br>
+* UserN (Normal User)<br>
+* UserI (Identified User)<br>
+### Default admin credentials:<br>
+* Email: admin@test.com<br>
+* Parola: Admin1!<br>
 ## Rulare aplicatie:
-Open the solution in Visual Studio<br>
-Restore NuGet packages<br>
-Build the solution<br>
-Run the application<br>
+* Open the solution in Visual Studio<br>
+* Restore NuGet packages<br>
+* Build the solution<br>
+* Run the application<br>
 
 # Exemple (screenshots)
 Adminul poate modifica rolurile utilizatorilor:
