@@ -48,6 +48,31 @@ Rezultatele motorului de cautare pot fi sortate crescator sau descrescator in fu
 * Administrare:<br />
 Administratorul poate sterge si edita atat produse cat si comentarii. Acesta poate, de asemenea, sa activeze sau sa revoce drepturile utilizatorilor.
 
+# Instructiuni de setup:
+## Preconditii:
+* Visual Studio 2022 or later<br>
+* .NET 6.0 SDK or later<br>
+* SQL Server (Local or Express)<br>
+## Database Setup:
+> [!NOTE]
+> Foloseste aceste comenzi in terminal
+> Add-migration [nume_migratie]
+> Update-Database.
+## Configuratia rolurilor:
+Aplicatia vine cu urmatoarele roluri predefinite:<br>
+Administrator<br>
+Collaborator<br>
+UserN (Normal User)<br>
+UserI (Identified User)<br>
+Default admin credentials:<br>
+Email: admin@test.com<br>
+Password: Admin1!<br>
+## Rulare aplicatie:
+Open the solution in Visual Studio<br>
+Restore NuGet packages<br>
+Build the solution<br>
+Run the application<br>
+
 # Exemple (screenshots)
 Adminul poate modifica rolurile utilizatorilor:
 ![image](https://github.com/user-attachments/assets/de318914-90b0-46f9-a4ee-5fb123ce9f25)
