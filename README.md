@@ -56,8 +56,8 @@ Administratorul poate sterge si edita atat produse cat si comentarii. Acesta poa
 ## Database Setup:
 > [!NOTE]
 > Foloseste aceste comenzi in terminal
-> Add-migration [nume_migratie]
-> Update-Database.
+> Add-migration [nume_migratie]<br>
+> Update-Database<br>
 ## Configuratia rolurilor:
 Aplicatia vine cu urmatoarele roluri predefinite:<br>
 Administrator<br>
@@ -66,7 +66,7 @@ UserN (Normal User)<br>
 UserI (Identified User)<br>
 Default admin credentials:<br>
 Email: admin@test.com<br>
-Password: Admin1!<br>
+Parola: Admin1!<br>
 ## Rulare aplicatie:
 Open the solution in Visual Studio<br>
 Restore NuGet packages<br>
